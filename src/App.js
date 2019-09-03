@@ -7,16 +7,22 @@ import todoList from "./component/todoList.json";
 function App() {
   const [todos, setTodos] = useState(todoList);
 
-  const [lastCompletedIdx, setLastCompletedIdx] = useState(0);
+  const [firstCompTodo, setFirstCompTodo] = useState(0);
 
   useEffect(() => {
     for (let i = 0; i < todos.length; i++) {
       let currTodo = todos[i];
 
-      if (!currTodo.isCompleted) {
+      if (currTodo.isCompleted) {
+        if (i === 0) {
+          setFirstCompTodo(0);
+          break;
+        }
+        setFirstCompTodo(i);
+        break;
       }
     }
-  });
+  }, [todos]);
 
   const addTodo = text => {
     const newTodos = [...todos, { text }];
@@ -38,18 +44,21 @@ function App() {
   };
 
   const uncompleteTodo = index => {
-    const newTodos = [...todos];
-    newTodos[index].isCompleted = false;
-    const uncheckedTodo = newTodos.splice(index, 1);
+    const todosList = [...todos];
 
-    for (let i = 0; i < newTodos.length; i++) {
-      let currTodo = newTodos[i];
-      if (currTodo.isCompleted) {
-        //insert one before
-      }
-    }
+    const otherCompTodos = todosList.filter((todo, idx) => {
+      return todo.isCompleted && idx !== index;
+    });
 
-    setTodos(newTodos);
+    const uncheckedTodo = todosList[index];
+    uncheckedTodo.isCompleted = false;
+
+    const rearrangedTodos = [
+      ...todoList.slice(0, firstCompTodo),
+      uncheckedTodo,
+      ...otherCompTodos
+    ];
+    setTodos(rearrangedTodos);
   };
 
   const editTodo = index => {
@@ -57,8 +66,11 @@ function App() {
   };
 
   const removeTodo = index => {
-    const newTodos = [...todos];
-    newTodos.splice(index, 1);
+    const todosList = [...todos];
+    let newTodos = [
+      ...todosList.slice(0, index),
+      ...todosList.slice(index + 1)
+    ];
     setTodos(newTodos);
   };
 
@@ -67,6 +79,9 @@ function App() {
       <div className="todo-list">
         <div className="todo-add">
           <TodoForm addTodo={addTodo} />
+        </div>
+        <div>
+          <p>Idx of first completed todo is: {firstCompTodo}</p>
         </div>
         {todos.map((todo, index) => (
           <Todo

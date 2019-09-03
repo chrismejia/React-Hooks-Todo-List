@@ -1,7 +1,7 @@
 .app {
   background: #209cee;
-  padding: 30px;
-  height: 100vh;
+  padding: 10%;
+  min-height: 100vh;
 }
 .todo-list {
   display: flex;
@@ -27,12 +27,18 @@
   justify-content: space-between;
 }
 
+.single-todo-done {
+  flex: 9;
+  background-color: red;
+}
+
 .single-todo {
   flex: 9;
   background-color: aquamarine;
 }
 
 .due-date {
+  margin-top: 12px;
   font-size: 12px;
 }
 
