@@ -9,6 +9,10 @@ function App() {
 
   const [firstCompTodo, setFirstCompTodo] = useState(0);
 
+  const [dateAscending, setDateAscending] = useState(true);
+
+  const [nameAscending, setNameAscending] = useState(true);
+
   useEffect(() => {
     for (let i = 0; i < todos.length; i++) {
       let currTodo = todos[i];
@@ -77,9 +81,105 @@ function App() {
     setTodos(newTodos);
   };
 
+  const dateSort = () => {
+    const todosList = [...todos];
+
+    const unCompTodos = todosList.filter(todo => {
+      return !todo.isCompleted;
+    });
+
+    const compTodos = todosList.filter(todo => {
+      return todo.isCompleted;
+    });
+
+    if (dateAscending) {
+      unCompTodos.sort((a, b) => {
+        if (a.dueDate > b.dueDate) {
+          return 1;
+        } else {
+          return -1;
+        }
+      });
+      compTodos.sort((a, b) => {
+        if (a.dueDate > b.dueDate) {
+          return 1;
+        } else {
+          return -1;
+        }
+      });
+    } else {
+      unCompTodos.sort((a, b) => {
+        if (a.dueDate < b.dueDate) {
+          return 1;
+        } else {
+          return -1;
+        }
+      });
+      compTodos.sort((a, b) => {
+        if (a.dueDate < b.dueDate) {
+          return 1;
+        } else {
+          return -1;
+        }
+      });
+    }
+    setDateAscending(!dateAscending);
+    const sortedTodos = [...unCompTodos, ...compTodos];
+    setTodos(sortedTodos);
+  };
+
+  const nameSort = () => {
+    const todosList = [...todos];
+
+    const unCompTodos = todosList.filter(todo => {
+      return !todo.isCompleted;
+    });
+
+    const compTodos = todosList.filter(todo => {
+      return todo.isCompleted;
+    });
+
+    if (nameAscending) {
+      unCompTodos.sort((a, b) => {
+        if (a.text > b.text) {
+          return 1;
+        } else {
+          return -1;
+        }
+      });
+      compTodos.sort((a, b) => {
+        if (a.text > b.text) {
+          return 1;
+        } else {
+          return -1;
+        }
+      });
+    } else {
+      unCompTodos.sort((a, b) => {
+        if (a.text < b.text) {
+          return 1;
+        } else {
+          return -1;
+        }
+      });
+      compTodos.sort((a, b) => {
+        if (a.text < b.text) {
+          return 1;
+        } else {
+          return -1;
+        }
+      });
+    }
+    setNameAscending(!nameAscending);
+    const sortedTodos = [...unCompTodos, ...compTodos];
+    setTodos(sortedTodos);
+  };
+
   return (
     <div className="app">
       <div className="todo-list">
+        <button onClick={dateSort}>Sort by Date</button>
+        <button onClick={nameSort}>Sort by Name</button>
         <div className="todo-add">
           <TodoForm addTodo={addTodo} />
         </div>
