@@ -28,7 +28,9 @@ function App() {
     }
   }, [todos]);
 
-  const addTodo = text => {
+  //we should add a way for the due date to be chosen
+  //maybe there's a calendar library or something
+  const addTodo = (text, date) => {
     const newTodos = [...todos, { text }];
     setTodos(newTodos);
   };
