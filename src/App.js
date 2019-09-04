@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import "./App.css";
-import Todo from "./component/Todo";
-import TodoForm from "./component/TodoForm";
-import todoList from "./component/todoList.json";
+import React, { useState, useEffect } from 'react';
+import './App.css';
+import Todo from './component/Todo';
+import TodoForm from './component/TodoForm';
+import todoList from './component/todoList.json';
 
 function App() {
   const [todos, setTodos] = useState(todoList);
@@ -44,20 +44,23 @@ function App() {
   };
 
   const uncompleteTodo = index => {
+    //make array from state obj, plus maintain immutability
     const todosList = [...todos];
-
+    //make arr of active todos
+    const unCompTodos = todosList.filter(todo => {
+      return !todo.isCompleted;
+    });
+    //make arr of finished todos minus selected one
     const otherCompTodos = todosList.filter((todo, idx) => {
       return todo.isCompleted && idx !== index;
     });
-
+    //point to selected task
     const uncheckedTodo = todosList[index];
+    //alter the selected task
     uncheckedTodo.isCompleted = false;
-
-    const rearrangedTodos = [
-      ...todoList.slice(0, firstCompTodo),
-      uncheckedTodo,
-      ...otherCompTodos
-    ];
+    //spread and rearrange active todos, then newly active todo, then finished todos
+    const rearrangedTodos = [...unCompTodos, uncheckedTodo, ...otherCompTodos];
+    //set state to match new data
     setTodos(rearrangedTodos);
   };
 
@@ -69,7 +72,7 @@ function App() {
     const todosList = [...todos];
     let newTodos = [
       ...todosList.slice(0, index),
-      ...todosList.slice(index + 1)
+      ...todosList.slice(index + 1),
     ];
     setTodos(newTodos);
   };
