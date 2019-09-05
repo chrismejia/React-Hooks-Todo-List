@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import './App.css';
-import Todo from './component/Todo';
-import TodoForm from './component/TodoForm';
-import todoList from './component/todoList.json';
+import React, { useState, useEffect } from "react";
+import "./App.css";
+import Todo from "./component/Todo";
+import TodoForm from "./component/TodoForm";
+import todoList from "./component/todoList.json";
 
 function App() {
   const [todos, setTodos] = useState(todoList);
@@ -37,13 +37,13 @@ function App() {
   const addTodo = task => {
     const dueDate =
       new Date().getMonth() +
-      '/' +
+      "/" +
       (new Date().getDate() + 1) +
-      '/' +
+      "/" +
       new Date().getFullYear();
     const isCompleted = false;
-    const subtasks = ['test1', 'test2'];
-    const tags = ['testTag1', 'testTag2'];
+    const subtasks = ["test1", "test2"];
+    const tags = ["testTag1", "testTag2"];
 
     const newTodos = [{ task, dueDate, isCompleted, subtasks, tags }, ...todos];
     setTodos(newTodos);
@@ -66,14 +66,14 @@ function App() {
     setTodos(newTodos);
   };
 
+  //make array from state obj, plus maintain immutability
+  //make arr of active todos
+  //make arr of finished todos minus selected one
+  //point to selected task
+  //alter the selected task
+  //spread and rearrange active todos, then newly active todo, then finished todos
+  //set state to match new data
   const uncompleteTodo = index => {
-    //make array from state obj, plus maintain immutability
-    //make arr of active todos
-    //make arr of finished todos minus selected one
-    //point to selected task
-    //alter the selected task
-    //spread and rearrange active todos, then newly active todo, then finished todos
-    //set state to match new data
     const todosList = [...todos];
     const unCompTodos = todosList.filter(todo => {
       return !todo.isCompleted;
@@ -88,10 +88,10 @@ function App() {
   };
 
   const editTodo = index => {
-    console.log('editing');
+    console.log("editing");
     const newTodos = [...todos];
     const currTodo = newTodos.splice(index, 1);
-    console.log('currTodo:', currTodo);
+    console.log("currTodo:", currTodo);
     setEditedTodo(currTodo[0]);
     setEditing(true);
     removeTodo(index);
@@ -101,7 +101,7 @@ function App() {
     const todosList = [...todos];
     let newTodos = [
       ...todosList.slice(0, index),
-      ...todosList.slice(index + 1),
+      ...todosList.slice(index + 1)
     ];
     setTodos(newTodos);
   };
@@ -202,34 +202,37 @@ function App() {
 
   return (
     <div className="app">
-      <div className="todo-list">
-        <button onClick={dateSort}>Sort by Date</button>
-        <button onClick={nameSort}>Sort by Name</button>
-
-        {editing ? (
-          <div className="todo-add">
-            <TodoForm addTodo={addTodo} editedTodo={editedTodo} />
+      <div className="todos">
+        <div className="todo-list">
+          {editing ? (
+            <div className="todo-add">
+              <TodoForm addTodo={addTodo} editedTodo={editedTodo} />
+            </div>
+          ) : (
+            <div className="todo-add">
+              <TodoForm addTodo={addTodo} editedTodo={null} />
+            </div>
+          )}
+          <div className="sort-button-group">
+            <button className="sort-button" onClick={dateSort}>
+              Sort by Date
+            </button>
+            <button className="sort-button" onClick={nameSort}>
+              Sort by Name
+            </button>
           </div>
-        ) : (
-          <div className="todo-add">
-            <TodoForm addTodo={addTodo} editedTodo={null} />
-          </div>
-        )}
-
-        <div>
-          <p>Idx of first completed todo is: {firstCompTodo}</p>
+          {todos.map((todo, index) => (
+            <Todo
+              key={index}
+              index={index}
+              todo={todo}
+              completeTodo={completeTodo}
+              uncompleteTodo={uncompleteTodo}
+              editTodo={editTodo}
+              removeTodo={removeTodo}
+            />
+          ))}
         </div>
-        {todos.map((todo, index) => (
-          <Todo
-            key={index}
-            index={index}
-            todo={todo}
-            completeTodo={completeTodo}
-            uncompleteTodo={uncompleteTodo}
-            editTodo={editTodo}
-            removeTodo={removeTodo}
-          />
-        ))}
       </div>
     </div>
   );
