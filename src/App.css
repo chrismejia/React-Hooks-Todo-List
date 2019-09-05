@@ -1,7 +1,7 @@
 .app {
   background: #209cee;
-  padding: 30px;
-  height: 100vh;
+  padding: 10%;
+  min-height: 100vh;
 }
 .todo-list {
   display: flex;
@@ -18,7 +18,6 @@
 
 .todo {
   background: #ffffff;
-  flex-direction: row;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
   padding: 3px 10px;
   font-size: 24px;
@@ -28,12 +27,24 @@
   justify-content: space-between;
 }
 
-.single-todo {
+.single-todo-done {
   flex: 9;
+  background-color: red;
 }
 
-.todo-button {
+.single-todo {
+  flex: 9;
+  background-color: aquamarine;
+}
+
+.due-date {
+  margin-top: 12px;
+  font-size: 12px;
+}
+
+button.todo-button {
   flex: 1;
+  background-color: coral;
 }
 
 .input {

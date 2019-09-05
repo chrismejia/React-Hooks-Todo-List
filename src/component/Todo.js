@@ -11,9 +11,14 @@ function Todo({
   return (
     <div
       className="todo"
-      style={{ textDecoration: todo.isCompleted ? "line-through" : "" }}
+      style={{
+        textDecoration: todo.isCompleted ? "line-through" : ""
+      }}
     >
-      <div className="single-todo">{todo.text}</div>
+      <div className={todo.isCompleted ? "single-todo-done" : "single-todo"}>
+        {todo.text}
+      </div>
+      <div className="due-date">Due: {todo.dueDate}</div>
 
       {todo.isCompleted ? (
         <button className="todo-button" onClick={() => uncompleteTodo(index)}>
