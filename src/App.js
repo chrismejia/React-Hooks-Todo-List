@@ -53,11 +53,15 @@ function App() {
     const uncheckedTodo = todosList[index];
     uncheckedTodo.isCompleted = false;
 
+    console.log(todosList);
+    console.log(otherCompTodos);
+    console.log(uncheckedTodo);
     const rearrangedTodos = [
       ...todoList.slice(0, firstCompTodo),
       uncheckedTodo,
       ...otherCompTodos
     ];
+
     setTodos(rearrangedTodos);
   };
 
