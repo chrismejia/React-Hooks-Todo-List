@@ -27,6 +27,17 @@
   justify-content: space-between;
 }
 
+.sort-button-group {
+  display: flex;
+}
+
+.sort-button {
+  flex: 1;
+  height: 50px;
+  padding: 0 5%;
+  font-size: 24px;
+}
+
 .single-todo-done {
   flex: 9;
   background-color: red;
