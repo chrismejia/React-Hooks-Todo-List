@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 function Todo({
   todo,
@@ -6,35 +6,42 @@ function Todo({
   completeTodo,
   uncompleteTodo,
   removeTodo,
-  editTodo
+  editTodo,
 }) {
   return (
     <div
       className="todo"
       style={{
-        textDecoration: todo.isCompleted ? "line-through" : ""
+        textDecoration: todo.isCompleted ? 'line-through' : '',
       }}
     >
-      <div className={todo.isCompleted ? "single-todo-done" : "single-todo"}>
+      <div className={todo.isCompleted ? 'single-todo-done' : 'single-todo'}>
         {todo.task}
       </div>
       <div className="due-date">Due: {todo.dueDate}</div>
 
       {todo.isCompleted ? (
-        <button className="todo-button" onClick={() => uncompleteTodo(index)}>
-          UNComplete
-        </button>
+        <div>
+          <button className="todo-button" onClick={() => uncompleteTodo(index)}>
+            Undo
+          </button>
+          <button className="todo-button" onClick={() => removeTodo(index)}>
+            X
+          </button>
+        </div>
       ) : (
-        <button className="todo-button" onClick={() => completeTodo(index)}>
-          Complete
-        </button>
+        <div>
+          <button className="todo-button" onClick={() => completeTodo(index)}>
+            Complete
+          </button>
+          <button className="todo-button" onClick={() => editTodo(index)}>
+            Edit
+          </button>
+          <button className="todo-button" onClick={() => removeTodo(index)}>
+            X
+          </button>
+        </div>
       )}
-      <button className="todo-button" onClick={() => editTodo(index)}>
-        Edit
-      </button>
-      <button className="todo-button" onClick={() => removeTodo(index)}>
-        X
-      </button>
     </div>
   );
 }
