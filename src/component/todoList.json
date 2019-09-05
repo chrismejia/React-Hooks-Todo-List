@@ -1,52 +1,116 @@
 [
   {
-    "text": "Cras in purus eu magna vulputate luctus.",
+    "task": "Cum sociis natoque penatibus et magnis dis parturient montes.",
+    "subtasks": ["integrate distributed infomediaries"],
     "isCompleted": false,
-    "dueDate": "09/16/2019"
+    "dueDate": "03/07/2019",
+    "tags": ["Danger", "Success"]
   },
   {
-    "text": "Cras pellentesque volutpat dui.",
+    "task": "Mauris lacinia sapien quis libero.",
+    "subtasks": [
+      "recontextualize synergistic users",
+      "enable impactful paradigms",
+      "streamline interactive channels",
+      "transform turn-key interfaces",
+      "visualize sticky bandwidth"
+    ],
     "isCompleted": false,
-    "dueDate": "09/02/2019"
+    "dueDate": "11/28/2018",
+    "tags": ["Dark", "Primary", "Secondary"]
   },
   {
-    "text": "Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue.",
+    "task": "Quisque id justo sit amet sapien dignissim vestibulum.",
+    "subtasks": [
+      "engage next-generation deliverables",
+      "repurpose cross-media interfaces",
+      "scale one-to-one synergies",
+      "productize plug-and-play networks",
+      "synthesize dynamic supply-chains"
+    ],
     "isCompleted": false,
-    "dueDate": "09/02/2019"
+    "dueDate": "06/07/2019",
+    "tags": ["Warning", "Light", "Success", "Primary", "Danger"]
   },
   {
-    "text": "Proin leo odio, porttitor id, consequat in, consequat ut, nulla.",
+    "task": "Suspendisse accumsan tortor quis turpis.",
+    "subtasks": [
+      "monetize clicks-and-mortar initiatives",
+      "disintermediate rich systems",
+      "benchmark enterprise content"
+    ],
     "isCompleted": false,
-    "dueDate": "09/12/2019"
+    "dueDate": "09/02/2019",
+    "tags": ["Dark", "Danger", "Warning", "Info", "Light"]
   },
   {
-    "text": "Nam nulla.",
-    "isCompleted": true,
-    "dueDate": "09/08/2019"
+    "task": "Nulla facilisi.",
+    "subtasks": [
+      "transform virtual action-items",
+      "enable dynamic e-tailers",
+      "integrate user-centric action-items"
+    ],
+    "isCompleted": false,
+    "dueDate": "04/06/2019",
+    "tags": ["Light", "Dark", "Warning", "Secondary", "Primary"]
   },
   {
-    "text": "In quis justo.",
+    "task": "Nam nulla magnus.",
+    "subtasks": [
+      "unleash viral interfaces",
+      "integrate next-generation relationships"
+    ],
     "isCompleted": true,
-    "dueDate": "09/18/2019"
+    "dueDate": "11/30/2018",
+    "tags": ["Secondary", "Primary", "Info", "Warning", "Dark"]
   },
   {
-    "text": "Aliquam non mauris.",
+    "task": "Vivamus metus arcu, adipiscing molestie.",
+    "subtasks": [
+      "seize customized niches",
+      "empower bricks-and-clicks e-markets",
+      "synthesize frictionless platforms",
+      "target compelling web services",
+      "evolve strategic paradigms"
+    ],
     "isCompleted": true,
-    "dueDate": "09/10/2019"
+    "dueDate": "06/18/2019",
+    "tags": ["Secondary", "Info", "Warning"]
   },
   {
-    "text": "Pellentesque ultrices mattis odio.",
+    "task": "Sed ante.",
+    "subtasks": [
+      "evolve integrated solutions",
+      "target plug-and-play networks",
+      "grow distributed users",
+      "harness efficient eyeballs",
+      "orchestrate leading-edge mindshare"
+    ],
     "isCompleted": true,
-    "dueDate": "09/20/2019"
+    "dueDate": "02/04/2019",
+    "tags": ["Success", "Primary"]
   },
   {
-    "text": "Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante.",
+    "task": "Quisque porta volutpat erat.",
+    "subtasks": [
+      "aggregate leading-edge methodologies",
+      "drive extensible bandwidth",
+      "revolutionize revolutionary initiatives",
+      "maximize value-added architectures",
+      "synthesize real-time bandwidth"
+    ],
     "isCompleted": true,
-    "dueDate": "09/23/2019"
+    "dueDate": "11/15/2019",
+    "tags": ["Primary", "Light", "Dark", "Secondary", "Info"]
   },
   {
-    "text": "Sed sagittis.",
+    "task": "Nullam orci pede, venenatis non, sodales sed.",
+    "subtasks": [
+      "architect best-of-breed infrastructures",
+      "repurpose clicks-and-mortar action-items"
+    ],
     "isCompleted": true,
-    "dueDate": "09/22/2019"
+    "dueDate": "09/22/2019",
+    "tags": ["Danger", "Dark"]
   }
 ]

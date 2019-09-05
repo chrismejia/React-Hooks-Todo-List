@@ -16,7 +16,7 @@ function Todo({
       }}
     >
       <div className={todo.isCompleted ? "single-todo-done" : "single-todo"}>
-        {todo.text}
+        {todo.task}
       </div>
       <div className="due-date">Due: {todo.dueDate}</div>
 

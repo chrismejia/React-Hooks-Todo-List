@@ -3,17 +3,21 @@
   padding: 10%;
   min-height: 100vh;
 }
-.todo-list {
+.todos {
   display: flex;
   flex-direction: column;
   background: #e8e8e8;
-  border-radius: 4px;
-  padding: 5px;
+  border-radius: 10px;
+  padding: 15px;
 }
 
 .todo-add {
   margin-bottom: 15px;
   font-size: 24px;
+}
+
+.todo-list {
+  margin-top: 15px;
 }
 
 .todo {
@@ -25,6 +29,17 @@
   border-radius: 3px;
   align-items: center;
   justify-content: space-between;
+}
+
+.sort-button-group {
+  display: flex;
+}
+
+.sort-button {
+  flex: 1;
+  height: 50px;
+  padding: 0 5%;
+  font-size: 24px;
 }
 
 .single-todo-done {
@@ -44,7 +59,6 @@
 
 button.todo-button {
   flex: 1;
-  background-color: coral;
 }
 
 .input {

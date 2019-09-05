@@ -9,6 +9,10 @@ function App() {
 
   const [firstCompTodo, setFirstCompTodo] = useState(0);
 
+  const [dateAscending, setDateAscending] = useState(true);
+
+  const [nameAscending, setNameAscending] = useState(true);
+
   useEffect(() => {
     for (let i = 0; i < todos.length; i++) {
       let currTodo = todos[i];
@@ -24,7 +28,9 @@ function App() {
     }
   }, [todos]);
 
-  const addTodo = text => {
+  //we should add a way for the due date to be chosen
+  //maybe there's a calendar library or something
+  const addTodo = (text, date) => {
     const newTodos = [...todos, { text }];
     setTodos(newTodos);
   };
@@ -43,25 +49,24 @@ function App() {
     setTodos(newTodos);
   };
 
+  //make array from state obj, plus maintain immutability
+  //make arr of active todos
+  //make arr of finished todos minus selected one
+  //point to selected task
+  //alter the selected task
+  //spread and rearrange active todos, then newly active todo, then finished todos
+  //set state to match new data
   const uncompleteTodo = index => {
     const todosList = [...todos];
-
+    const unCompTodos = todosList.filter(todo => {
+      return !todo.isCompleted;
+    });
     const otherCompTodos = todosList.filter((todo, idx) => {
       return todo.isCompleted && idx !== index;
     });
-
     const uncheckedTodo = todosList[index];
     uncheckedTodo.isCompleted = false;
-
-    console.log(todosList);
-    console.log(otherCompTodos);
-    console.log(uncheckedTodo);
-    const rearrangedTodos = [
-      ...todoList.slice(0, firstCompTodo),
-      uncheckedTodo,
-      ...otherCompTodos
-    ];
-
+    const rearrangedTodos = [...unCompTodos, uncheckedTodo, ...otherCompTodos];
     setTodos(rearrangedTodos);
   };
 
@@ -78,26 +83,127 @@ function App() {
     setTodos(newTodos);
   };
 
+  const dateSort = () => {
+    const todosList = [...todos];
+
+    const unCompTodos = todosList.filter(todo => {
+      return !todo.isCompleted;
+    });
+
+    const compTodos = todosList.filter(todo => {
+      return todo.isCompleted;
+    });
+
+    if (dateAscending) {
+      unCompTodos.sort((a, b) => {
+        if (a.dueDate > b.dueDate) {
+          return 1;
+        } else {
+          return -1;
+        }
+      });
+      compTodos.sort((a, b) => {
+        if (a.dueDate > b.dueDate) {
+          return 1;
+        } else {
+          return -1;
+        }
+      });
+    } else {
+      unCompTodos.sort((a, b) => {
+        if (a.dueDate < b.dueDate) {
+          return 1;
+        } else {
+          return -1;
+        }
+      });
+      compTodos.sort((a, b) => {
+        if (a.dueDate < b.dueDate) {
+          return 1;
+        } else {
+          return -1;
+        }
+      });
+    }
+    setDateAscending(!dateAscending);
+    const sortedTodos = [...unCompTodos, ...compTodos];
+    setTodos(sortedTodos);
+  };
+
+  const nameSort = () => {
+    const todosList = [...todos];
+
+    const unCompTodos = todosList.filter(todo => {
+      return !todo.isCompleted;
+    });
+
+    const compTodos = todosList.filter(todo => {
+      return todo.isCompleted;
+    });
+
+    if (nameAscending) {
+      unCompTodos.sort((a, b) => {
+        if (a.text > b.text) {
+          return 1;
+        } else {
+          return -1;
+        }
+      });
+      compTodos.sort((a, b) => {
+        if (a.text > b.text) {
+          return 1;
+        } else {
+          return -1;
+        }
+      });
+    } else {
+      unCompTodos.sort((a, b) => {
+        if (a.text < b.text) {
+          return 1;
+        } else {
+          return -1;
+        }
+      });
+      compTodos.sort((a, b) => {
+        if (a.text < b.text) {
+          return 1;
+        } else {
+          return -1;
+        }
+      });
+    }
+    setNameAscending(!nameAscending);
+    const sortedTodos = [...unCompTodos, ...compTodos];
+    setTodos(sortedTodos);
+  };
+
   return (
     <div className="app">
-      <div className="todo-list">
+      <div className="todos">
         <div className="todo-add">
           <TodoForm addTodo={addTodo} />
         </div>
-        <div>
-          <p>Idx of first completed todo is: {firstCompTodo}</p>
+        <div className="sort-button-group">
+          <button className="sort-button" onClick={dateSort}>
+            Sort by Date
+          </button>
+          <button className="sort-button" onClick={nameSort}>
+            Sort by Name
+          </button>
         </div>
-        {todos.map((todo, index) => (
-          <Todo
-            key={index}
-            index={index}
-            todo={todo}
-            completeTodo={completeTodo}
-            uncompleteTodo={uncompleteTodo}
-            editTodo={editTodo}
-            removeTodo={removeTodo}
-          />
-        ))}
+        <div className="todo-list">
+          {todos.map((todo, index) => (
+            <Todo
+              key={index}
+              index={index}
+              todo={todo}
+              completeTodo={completeTodo}
+              uncompleteTodo={uncompleteTodo}
+              editTodo={editTodo}
+              removeTodo={removeTodo}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
