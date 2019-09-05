@@ -6,7 +6,7 @@ function TodoForm({ addTodo, editedTodo }) {
   const [value, setValue] = useState('');
   //date selection to be added:
   //const [date, setDate] = useState();
-
+  let text = '';
   const handleSubmit = e => {
     e.preventDefault();
     if (!value) return;
@@ -15,25 +15,26 @@ function TodoForm({ addTodo, editedTodo }) {
   };
 
   if (editedTodo !== null) {
-    // setValue(editedTodo.task);
+    text = editedTodo.task;
     return (
       <form onSubmit={handleSubmit}>
         <input
           type="text"
           className="input"
-          placeholder={editedTodo.task}
-          value={editedTodo.task}
+          placeholder={text}
+          defaultValue={text}
           onChange={e => setValue(e.target.value)}
         />
       </form>
     );
   } else {
+    text = 'Hello! Please input a task here.';
     return (
       <form onSubmit={handleSubmit}>
         <input
           type="text"
           className="input"
-          placeholder="Hello! Please input a task here."
+          placeholder={text}
           value={value}
           onChange={e => setValue(e.target.value)}
         />
