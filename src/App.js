@@ -179,7 +179,7 @@ function App() {
 
   return (
     <div className="app">
-      <div className="todo-list">
+      <div className="todos">
         <div className="todo-add">
           <TodoForm addTodo={addTodo} />
         </div>
@@ -191,20 +191,19 @@ function App() {
             Sort by Name
           </button>
         </div>
-        <div>
-          <p>Idx of first completed todo is: {firstCompTodo}</p>
+        <div className="todo-list">
+          {todos.map((todo, index) => (
+            <Todo
+              key={index}
+              index={index}
+              todo={todo}
+              completeTodo={completeTodo}
+              uncompleteTodo={uncompleteTodo}
+              editTodo={editTodo}
+              removeTodo={removeTodo}
+            />
+          ))}
         </div>
-        {todos.map((todo, index) => (
-          <Todo
-            key={index}
-            index={index}
-            todo={todo}
-            completeTodo={completeTodo}
-            uncompleteTodo={uncompleteTodo}
-            editTodo={editTodo}
-            removeTodo={removeTodo}
-          />
-        ))}
       </div>
     </div>
   );
