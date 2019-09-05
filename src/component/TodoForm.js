@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
+import DatePicker from 'react-datepicker';
+
+import 'react-datepicker/dist/react-datepicker.css';
 
 function TodoForm({ addTodo }) {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState('');
+  const [date, setDate] = useState();
 
   const handleSubmit = e => {
     e.preventDefault();
     if (!value) return;
     addTodo(value);
-    setValue("");
+    setValue('');
   };
 
   return (
