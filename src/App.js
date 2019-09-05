@@ -88,13 +88,13 @@ function App() {
   };
 
   const editTodo = index => {
+    console.log('editing');
     const newTodos = [...todos];
-
     const currTodo = newTodos.splice(index, 1);
-
-    setEditedTodo(currTodo);
+    console.log('currTodo:', currTodo);
+    setEditedTodo(currTodo[0]);
     setEditing(true);
-    // removeTodo(index);
+    removeTodo(index);
   };
 
   const removeTodo = index => {
@@ -208,11 +208,11 @@ function App() {
 
         {editing ? (
           <div className="todo-add">
-            <TodoForm addTodo={addTodo} editTodo={editTodo} />
+            <TodoForm addTodo={addTodo} editedTodo={editedTodo} />
           </div>
         ) : (
           <div className="todo-add">
-            <TodoForm addTodo={addTodo} editTodo={editTodo} />
+            <TodoForm addTodo={addTodo} editedTodo={null} />
           </div>
         )}
 

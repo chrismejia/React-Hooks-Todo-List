@@ -21,20 +21,27 @@ function Todo({
       <div className="due-date">Due: {todo.dueDate}</div>
 
       {todo.isCompleted ? (
-        <button className="todo-button" onClick={() => uncompleteTodo(index)}>
-          Undo
-        </button>
+        <div>
+          <button className="todo-button" onClick={() => uncompleteTodo(index)}>
+            Undo
+          </button>
+          <button className="todo-button" onClick={() => removeTodo(index)}>
+            X
+          </button>
+        </div>
       ) : (
-        <button className="todo-button" onClick={() => completeTodo(index)}>
-          Complete
-        </button>
+        <div>
+          <button className="todo-button" onClick={() => completeTodo(index)}>
+            Complete
+          </button>
+          <button className="todo-button" onClick={() => editTodo(index)}>
+            Edit
+          </button>
+          <button className="todo-button" onClick={() => removeTodo(index)}>
+            X
+          </button>
+        </div>
       )}
-      <button className="todo-button" onClick={() => editTodo(index)}>
-        Edit
-      </button>
-      <button className="todo-button" onClick={() => removeTodo(index)}>
-        X
-      </button>
     </div>
   );
 }
