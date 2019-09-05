@@ -9,9 +9,13 @@ function App() {
 
   const [firstCompTodo, setFirstCompTodo] = useState(0);
 
-  const [dateAscending, setDateAscending] = useState(true);
+  const [dateAscending, setDateAscending] = useState(false);
 
   const [nameAscending, setNameAscending] = useState(true);
+
+  const [editing, setEditing] = useState(false);
+
+  const [editedTodo, setEditedTodo] = useState(null);
 
   useEffect(() => {
     for (let i = 0; i < todos.length; i++) {
@@ -30,9 +34,20 @@ function App() {
 
   //we should add a way for the due date to be chosen
   //maybe there's a calendar library or something
-  const addTodo = (text, date) => {
-    const newTodos = [...todos, { text }];
+  const addTodo = task => {
+    const dueDate =
+      new Date().getMonth() +
+      "/" +
+      (new Date().getDate() + 1) +
+      "/" +
+      new Date().getFullYear();
+    const isCompleted = false;
+    const subtasks = ["test1", "test2"];
+    const tags = ["testTag1", "testTag2"];
+
+    const newTodos = [{ task, dueDate, isCompleted, subtasks, tags }, ...todos];
     setTodos(newTodos);
+    setEditing(false);
   };
 
   // Spread list of todos in array
@@ -43,9 +58,11 @@ function App() {
   // Update todos with updated newTodos array
   const completeTodo = index => {
     let newTodos = [...todos];
-    newTodos[index].isCompleted = true;
     const [finishedTodo] = newTodos.splice(index, 1);
-    newTodos = [...newTodos, finishedTodo];
+    finishedTodo.isCompleted = true;
+    // newTodos[index].isCompleted = true;
+    newTodos.splice(firstCompTodo - 1, 0, finishedTodo);
+    // newTodos = [...newTodos, finishedTodo];
     setTodos(newTodos);
   };
 
@@ -71,7 +88,13 @@ function App() {
   };
 
   const editTodo = index => {
+    console.log("editing");
     const newTodos = [...todos];
+    const currTodo = newTodos.splice(index, 1);
+    console.log("currTodo:", currTodo);
+    setEditedTodo(currTodo[0]);
+    setEditing(true);
+    removeTodo(index);
   };
 
   const removeTodo = index => {
@@ -180,18 +203,24 @@ function App() {
   return (
     <div className="app">
       <div className="todos">
-        <div className="todo-add">
-          <TodoForm addTodo={addTodo} />
-        </div>
-        <div className="sort-button-group">
-          <button className="sort-button" onClick={dateSort}>
-            Sort by Date
-          </button>
-          <button className="sort-button" onClick={nameSort}>
-            Sort by Name
-          </button>
-        </div>
         <div className="todo-list">
+          {editing ? (
+            <div className="todo-add">
+              <TodoForm addTodo={addTodo} editedTodo={editedTodo} />
+            </div>
+          ) : (
+            <div className="todo-add">
+              <TodoForm addTodo={addTodo} editedTodo={null} />
+            </div>
+          )}
+          <div className="sort-button-group">
+            <button className="sort-button" onClick={dateSort}>
+              Sort by Date
+            </button>
+            <button className="sort-button" onClick={nameSort}>
+              Sort by Name
+            </button>
+          </div>
           {todos.map((todo, index) => (
             <Todo
               key={index}
