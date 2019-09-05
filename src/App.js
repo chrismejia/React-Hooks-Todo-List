@@ -34,8 +34,18 @@ function App() {
 
   //we should add a way for the due date to be chosen
   //maybe there's a calendar library or something
-  const addTodo = (text, date) => {
-    const newTodos = [...todos, { text }];
+  const addTodo = task => {
+    const dueDate =
+      new Date().getMonth() +
+      '/' +
+      (new Date().getDate() + 1) +
+      '/' +
+      new Date().getFullYear();
+    const isCompleted = false;
+    const subtasks = ['test1', 'test2'];
+    const tags = ['testTag1', 'testTag2'];
+
+    const newTodos = [{ task, dueDate, isCompleted, subtasks, tags }, ...todos];
     setTodos(newTodos);
     setEditing(false);
   };
@@ -78,8 +88,10 @@ function App() {
   const editTodo = index => {
     const newTodos = [...todos];
 
-    setEditedTodo(newTodos[index]);
+    const currTodo = newTodos[index];
 
+    setEditedTodo(currTodo);
+    removeTodo(index);
     setEditing(true);
   };
 
@@ -191,19 +203,11 @@ function App() {
       <div className="todo-list">
         <button onClick={dateSort}>Sort by Date</button>
         <button onClick={nameSort}>Sort by Name</button>
-        {editing ? (
-          <div className="todo-add">
-            <TodoForm
-              addTodo={addTodo}
-              editedTodo={editedTodo}
-              editing={editing}
-            />
-          </div>
-        ) : (
-          <div className="todo-add">
-            <TodoForm addTodo={addTodo} editTodo={editTodo} editing={editing} />
-          </div>
-        )}
+
+        <div className="todo-add">
+          <TodoForm addTodo={addTodo} editTodo={editTodo} editing={editing} />
+        </div>
+
         <div>
           <p>Idx of first completed todo is: {firstCompTodo}</p>
         </div>
