@@ -58,41 +58,43 @@ function App() {
   // Update todos with updated newTodos array
   const completeTodo = index => {
     let newTodos = [...todos];
-    newTodos[index].isCompleted = true;
     const [finishedTodo] = newTodos.splice(index, 1);
-    newTodos = [...newTodos, finishedTodo];
+    finishedTodo.isCompleted = true;
+    // newTodos[index].isCompleted = true;
+    newTodos.splice(firstCompTodo - 1, 0, finishedTodo);
+    // newTodos = [...newTodos, finishedTodo];
     setTodos(newTodos);
   };
 
   const uncompleteTodo = index => {
     //make array from state obj, plus maintain immutability
-    const todosList = [...todos];
     //make arr of active todos
+    //make arr of finished todos minus selected one
+    //point to selected task
+    //alter the selected task
+    //spread and rearrange active todos, then newly active todo, then finished todos
+    //set state to match new data
+    const todosList = [...todos];
     const unCompTodos = todosList.filter(todo => {
       return !todo.isCompleted;
     });
-    //make arr of finished todos minus selected one
     const otherCompTodos = todosList.filter((todo, idx) => {
       return todo.isCompleted && idx !== index;
     });
-    //point to selected task
     const uncheckedTodo = todosList[index];
-    //alter the selected task
     uncheckedTodo.isCompleted = false;
-    //spread and rearrange active todos, then newly active todo, then finished todos
     const rearrangedTodos = [...unCompTodos, uncheckedTodo, ...otherCompTodos];
-    //set state to match new data
     setTodos(rearrangedTodos);
   };
 
   const editTodo = index => {
     const newTodos = [...todos];
 
-    const currTodo = newTodos[index];
+    const currTodo = newTodos.splice(index, 1);
 
     setEditedTodo(currTodo);
-    removeTodo(index);
     setEditing(true);
+    // removeTodo(index);
   };
 
   const removeTodo = index => {
@@ -204,9 +206,15 @@ function App() {
         <button onClick={dateSort}>Sort by Date</button>
         <button onClick={nameSort}>Sort by Name</button>
 
-        <div className="todo-add">
-          <TodoForm addTodo={addTodo} editTodo={editTodo} editing={editing} />
-        </div>
+        {editing ? (
+          <div className="todo-add">
+            <TodoForm addTodo={addTodo} editTodo={editTodo} />
+          </div>
+        ) : (
+          <div className="todo-add">
+            <TodoForm addTodo={addTodo} editTodo={editTodo} />
+          </div>
+        )}
 
         <div>
           <p>Idx of first completed todo is: {firstCompTodo}</p>

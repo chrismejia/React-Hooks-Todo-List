@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import DatePicker from 'react-datepicker';
+// import DatePicker from 'react-datepicker';
+// import 'react-datepicker/dist/react-datepicker.css';
 
-import 'react-datepicker/dist/react-datepicker.css';
-
-function TodoForm({ addTodo, editing, editedTodo = null }) {
+function TodoForm({ addTodo, editedTodo = null }) {
   const [value, setValue] = useState('');
   //date selection to be added:
   //const [date, setDate] = useState();
@@ -17,7 +16,7 @@ function TodoForm({ addTodo, editing, editedTodo = null }) {
 
   return (
     <div>
-      {editing ? (
+      {editedTodo !== null ? (
         <form onSubmit={handleSubmit}>
           <input
             type="text"
